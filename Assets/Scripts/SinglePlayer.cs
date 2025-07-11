@@ -40,7 +40,7 @@ namespace TicTacToe
         public  void UpdateTurn()
         {
             Board.EnableInteractable(false);
-            Debug.LogError("Turn "+ playerTurn+ " PLAYER SYMBOL "+ pllayer0.symbol );
+            Debug.Log("Turn "+ playerTurn+ " PLAYER SYMBOL "+ pllayer0.symbol );
             if (playerTurn == 0)
             {
                 if (Board.CheckForWin(pllayer0.symbol))

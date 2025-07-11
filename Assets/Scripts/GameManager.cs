@@ -7,9 +7,9 @@ namespace TicTacToe
     public class GameManager : MonoBehaviour
     {
         public static GameManager instance;
-        public GameMode gameMode;
-        public SinglePlayer singlePlayerGame;
-        public TicTacToeColyseusManager multiplayer;
+        [SerializeField]public GameMode gameMode;
+        [SerializeField] private SinglePlayer singlePlayerGame;
+        [SerializeField] private TicTacToeColyseusManager multiplayer;
         [SerializeField] TicTacToeBoard board;
         public GameObject gameWin;
         public TMPro.TMP_Text gameWinText;
