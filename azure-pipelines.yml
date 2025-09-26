@@ -10,15 +10,29 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+# Build Windows
 - task: UnityBuildTask@3
+  displayName: 'Build Windows Version'
   inputs:
     unityVersion: '2022.3.11f1'
     buildTarget: 'StandaloneWindows64'
-    outputPath: '$(Build.ArtifactStagingDirectory)/Build'
-- task: PublishBuildArtifacts@1
+    outputPath: '$(Build.ArtifactStagingDirectory)/Windows'
+
+# Build Android (same job)
+- task: UnityBuildTask@3
+  displayName: 'Build Android Version'
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)/Build'
-    artifactName: 'Build'
+    unityVersion: '2022.3.11f1'
+    buildTarget: 'Android'
+    outputPath: '$(Build.ArtifactStagingDirectory)/Android'
+
+# Publish all artifacts together
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Build Artifacts'
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'AllBuilds'
+    
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
