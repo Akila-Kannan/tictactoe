@@ -9,20 +9,29 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+
 steps:
 # Build Windows
+- task: UnitySetupTask@2
+  inputs:
+    versionSelectionMode: 'specify'
+    version: '2022.3.9f1'
+    revision: 'ea401c316338'
+- task: UnitySetupTask@2
+  inputs:
+    installAndroidModule: true
+    installWindowsIL2CPPModule: true
+
 - task: UnityBuildTask@3
   displayName: 'Build Windows Version'
   inputs:
-    unityVersion: '2022.3.11f1'
     buildTarget: 'StandaloneWindows64'
     outputPath: '$(Build.ArtifactStagingDirectory)/Windows'
-
+    
 # Build Android (same job)
 - task: UnityBuildTask@3
   displayName: 'Build Android Version'
   inputs:
-    unityVersion: '2022.3.11f1'
     buildTarget: 'Android'
     outputPath: '$(Build.ArtifactStagingDirectory)/Android'
 
